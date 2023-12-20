@@ -77,7 +77,7 @@ func main() {
 	// publish to exchange
 	if err := ch.Publish(exchangeName, routingKey, false, false,
 		amqp.Publishing{
-			DeliveryMode: amqp.Persistent,
+			DeliveryMode: amqp.Persistent, // kalo fanout ga ngaruh
 			ContentType:  "text/plain",
 			Body:         body,
 		}); err != nil {
