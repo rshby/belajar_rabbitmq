@@ -68,7 +68,7 @@ func main() {
 	}
 
 	// publish message
-	keySend := "aggrements.eu.berlin"
+	keySend := "aggrements.eu.test.store"
 	if err := ch.Publish(exchangeName, keySend, false, false, amqp.Publishing{
 		DeliveryMode: amqp.Persistent,
 		ContentType:  "text/plain",

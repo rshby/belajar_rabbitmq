@@ -56,7 +56,7 @@ func main() {
 
 	// publish a message
 	n := 6
-	for i := 0; i < 20000; i++ {
+	for i := 0; i < 300; i++ {
 		go func(wg *sync.WaitGroup, mtx *sync.Mutex, i int) {
 			wg.Add(1)
 			mtx.Lock()
@@ -73,6 +73,7 @@ func main() {
 					CorrelationId: corrId,
 					ReplyTo:       callbackQueue.Name,
 					Body:          []byte(strconv.Itoa(n)),
+					Priority:      1,
 				}); err != nil {
 				logrus.Fatalf("cant send message : %v", err)
 			}

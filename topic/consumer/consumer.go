@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
+	"github.com/streadway/amqp"
 	"os"
 )
 
@@ -36,7 +37,9 @@ func main() {
 	}
 
 	allAggrementQueue := "all_aggrement"
-	allMsg, err := ch.Consume(allAggrementQueue, "", true, false, false, false, nil)
+	allMsg, err := ch.Consume(allAggrementQueue, "", true, false, false, false, amqp.Table{
+		"x-priority-max": "0-256",
+	})
 	if err != nil {
 		logrus.Fatalf("cant consume queue %v : %v\n", allAggrementQueue, err)
 	}
